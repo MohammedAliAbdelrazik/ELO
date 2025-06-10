@@ -1,96 +1,203 @@
+
+
 body {
   margin: 0;
-  font-family: "Cairo", sans-serif;
-  background: #f0faff;
+  font-family: 'Cairo', sans-serif;
+  background: #e0f7fa;
   direction: rtl;
+  color: #333;
+  line-height: 1.6;
 }
 
+/* رأس الصفحة */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px 20px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .menu-icon {
   font-size: 24px;
   cursor: pointer;
+  color: #333;
 }
 
 #search {
-  padding: 8px;
+  padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  width: 60%;
+  width: 50%;
+  font-size: 14px;
 }
 
+/* القائمة الجانبية */
 .sidebar {
   position: fixed;
   right: 0;
   top: 0;
-  width: 200px;
+  width: 220px;
   height: 100%;
-  background: #fff;
-  border-left: 1px solid #ccc;
-  padding: 10px;
+  background: #ffffff;
+  border-left: 1px solid #ddd;
+  padding: 20px;
   z-index: 1000;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar ul li {
-  padding: 10px;
+  padding: 12px 10px;
   cursor: pointer;
   border-bottom: 1px solid #eee;
+  color: #333;
+  transition: background 0.3s;
 }
 
+.sidebar ul li:hover {
+  background: #f0f0f0;
+}
+
+/* إخفاء العنصر */
 .hidden {
   display: none;
 }
 
 main {
-  padding: 20px;
+  padding: 30px 20px;
+  max-width: 800px;
+  margin: 50px auto 20px auto; /* 50px مسافة من فوق */
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
+
+/* زر الإضافة */
 .main-btn {
-  background: #00bfa6;
+  background: #50ce6d; /* أخضر جذاب */
   color: white;
-  padding: 10px 15px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 15px;
+  transition: background 0.3s;
 }
 
+.main-btn:hover {
+  background: #218838; /* أغمق شوية عند المرور عليه */
+}
+
+/* قسم المهام */
 .tasks-section {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .task-btn {
   background: #ff9800;
   color: white;
   border: none;
-  padding: 8px 15px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+.task-btn:hover {
+  background: #e68a00;
 }
 
 #tasks {
   list-style: none;
-  padding: 10px;
+  padding: 15px;
   margin-top: 10px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 #tasks li {
-  padding: 6px 0;
+  padding: 8px 0;
   border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #search {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-left: none;
+    box-shadow: none;
+  }
+
+  main {
+    margin: 30px 10px;
+    padding: 20px 15px;
+  }
+
+  .main-btn,
+.task-btn {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.main-btn {
+  background: #28a745;
+  color: white;
+}
+
+.main-btn:hover {
+  background: #218838;
+}
+
+.task-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.task-btn:hover {
+  background: #e68a00;
+}
+}
+.close-btn {
+  font-size: 22px;
+  text-align: left;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #000;
 }
