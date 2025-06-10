@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إدارة الدراسة</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- القائمة الجانبية -->
+  <div id="sidebar" class="sidebar hidden">
+    <ul>
+      <li onclick="goToYear('سنة أولى')">سنة أولى</li>
+      <li onclick="goToYear('سنة ثانية')">سنة ثانية</li>
+      <li onclick="goToYear('سنة ثالثة')">سنة ثالثة</li>
+      <li onclick="goToYear('سنة رابعة')">سنة رابعة</li>
+      <li onclick="goToYear('سنة خامسة')">سنة خامسة</li>
+      <li onclick="goToYear('الامتياز')">الامتياز</li>
+    </ul>
+  </div>
+
+  <!-- رأس الصفحة -->
+  <header>
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+    <input type="text" id="search" placeholder="ابحث عن المادة..." />
+  </header>
+
+  <!-- محتوى الصفحة -->
+  <main>
+    <h1>مرحبا بك </h1>
+
+    <button class="main-btn" onclick="loadAddYear()">➕ إضافة سنة دراسية</button>
+
+    <div class="tasks-section">
+      <button onclick="toggleTasks()" class="task-btn">⚠ المهام المتراكمة</button>
+      <ul id="tasks" class="hidden">
+        <li>📌 محاضرة 2 - فسيولوجي (سنة ثانية)</li>
+        <li>📌 محاضرة 1 - أناتومي (سنة أولى)</li>
+      </ul>
+    </div>
+
+    <div id="dynamic-content">
+      <!-- سيتم تحميل صفحات أخرى هنا -->
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
