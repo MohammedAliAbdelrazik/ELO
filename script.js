@@ -163,3 +163,85 @@ function addSectionItem(subjectName, sectionType) {
 
   loadSection(subjectName, sectionType); // إعادة تحميل المحتوى
 }
+
+function updateTasksList() {
+  const tasksUl = document.getElementById("tasks");
+  tasksUl.innerHTML = ""; // امسح المهام القديمة
+
+  if (!window.sections) return;
+
+  Object.keys(window.sections).forEach((key) => {
+    const sectionList = window.sections[key];
+
+    sectionList.forEach((_, index) => {
+      const itemId = `${key}-${index}`;
+      const isChecked = localStorage.getItem(itemId) === "true";
+
+      if (!isChecked) {
+        const [subjectName, sectionType] = key.split("-");
+        const itemTitle = sectionType === "محاضرات" ?` محاضرة ${index + 1}` :` سكشن ${index + 1}`;
+        const li = document.createElement("li");
+        li.innerHTML = `📌 <a href="#${itemId}" onclick="goToStoredSection('${key}', ${index})">${itemTitle} - ${subjectName}</a>`;
+        tasksUl.appendChild(li);
+      }
+    });
+  });
+}
+
+function goToStoredSection(key, index) {
+  const itemTitle = key.includes("محاضرات") ? `Lec-${index + 1}` : `Tut-${index + 1}`;
+  openSectionDetail(key, index, itemTitle);
+}
+
+function addSectionItem(subjectName, sectionType) {
+  const key = `${subjectName}-${sectionType}`;
+  if (!window.sections) window.sections = {};
+  if (!window.sections[key]) window.sections[key] = [];
+
+  window.sections[key].push({});
+  loadSection(subjectName, sectionType);
+}
+
+function loadSection(subjectName, sectionType) {
+  const key = `${subjectName}-${sectionType}`;
+  if (!window.sections) window.sections = {};
+  if (!window.sections[key]) window.sections[key] = [];
+
+  const sectionList = window.sections[key];
+
+  const listItems = sectionList.map((_, index) => {
+    const itemId = `${key}-${index}`;
+    const itemTitle = sectionType === "محاضرات" ? `Lec-${index + 1}` : `Tut-${index + 1}`;
+    const isChecked = localStorage.getItem(itemId) === "true";
+
+    return `
+      <li style="display:flex;align-items:center;gap:10px;" id="${itemId}">
+        <input type="checkbox" onchange="toggleStudied('${itemId}')" ${isChecked ? "checked" : ""}/>
+        <span onclick="openSectionDetail('${key}', ${index}, '${itemTitle}')" style="cursor:pointer; color:#007bff;">📄 ${itemTitle}</span>
+      </li>`;
+  }).join("");
+
+  const percentage = Math.round(
+    (sectionList.filter((_, index) => localStorage.getItem(`${key}-${index}`) === "true").length / sectionList.length) * 100
+  );
+
+  document.getElementById("dynamic-content").innerHTML = `
+    <div style="margin-top:20px; background:white; padding:15px; border-radius:10px;">
+      <h2>${sectionType} - ${subjectName}</h2>
+      <p style="margin-bottom:10px;">تمت مذاكرة ${percentage}%</p>
+      <button onclick="addSectionItem('${subjectName}', '${sectionType}')">➕ إضافة ${sectionType === 'محاضرات' ? 'محاضرة' : 'سكشن'}</button>
+      <ul id="section-list">
+        ${listItems || "<li>لا يوجد محتوى بعد.</li>"}
+      </ul>
+    </div>
+  `;
+
+  updateTasksList();
+}
+
+function toggleStudied(itemId) {
+  const current = localStorage.getItem(itemId) === "true";
+  localStorage.setItem(itemId, !current);
+  updateTasksList();
+  loadSectionFromKey(itemId.split("-").slice(0, -1).join("-"));
+}
