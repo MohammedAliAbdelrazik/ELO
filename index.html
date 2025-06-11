@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
+  <button class="menu-toggle" onclick="toggleSidebar()">📂 القائمة</button>
   <meta charset="UTF-8" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,7 +10,6 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-
   <!-- القائمة الجانبية -->
   <div id="sidebar" class="sidebar hidden">
   <div class="close-btn" onclick="toggleSidebar()">✖</div>
@@ -46,7 +47,7 @@
       <!-- سيتم تحميل صفحات أخرى هنا -->
     </div>
   </main>
-
+<div class="overlay" onclick="toggleSidebar()"></div>
   <script src="script.js"></script>
 </body>
 </html>
