@@ -239,9 +239,40 @@ function loadSection(subjectName, sectionType) {
   updateTasksList();
 }
 
-function toggleStudied(itemId) {
-  const current = localStorage.getItem(itemId) === "true";
-  localStorage.setItem(itemId, !current);
-  updateTasksList();
-  loadSectionFromKey(itemId.split("-").slice(0, -1).join("-"));
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.querySelector(".overlay");
+
+  const isHidden = sidebar.classList.contains("hidden");
+
+  if (isHidden) {
+    sidebar.classList.remove("hidden");
+    overlay.classList.add("active");
+  } else {
+    sidebar.classList.add("hidden");
+    overlay.classList.remove("active");
+  }
 }
+document.addEventListener('DOMContentLoaded', function () {
+  const sidebar = document.querySelector('.sidebar');
+  const toggleButton = document.querySelector('.menu-toggle');
+  const overlay = document.querySelector('.overlay');
+
+  toggleButton.addEventListener('click', function () {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+  });
+
+  // إغلاق القائمة لو ضغط المستخدم براها
+  document.addEventListener('click', function (e) {
+    if (
+      window.innerWidth <= 768 &&
+      sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      !toggleButton.contains(e.target)
+    ) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    }
+  });
+});
