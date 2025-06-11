@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Cairo', sans-serif;
-  background: #e0f7fa;
+  background: #cff0f5;
   direction: rtl;
   color: #333;
   line-height: 1.6;
@@ -15,7 +15,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
-  background: #ffffff;
+  background: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
@@ -85,19 +85,22 @@ main {
 
 /* زر الإضافة */
 .main-btn {
-  background: #50ce6d; /* أخضر جذاب */
+  background: linear-gradient(to right, #43a047, #66bb6a);
   color: white;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
   cursor: pointer;
-  margin-top: 15px;
-  transition: background 0.3s;
+  margin-top: 20px;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
 }
 
 .main-btn:hover {
-  background: #218838; /* أغمق شوية عند المرور عليه */
+  background: linear-gradient(to right, #388e3c, #4caf50);
+  transform: scale(1.05);
 }
 
 /* قسم المهام */
@@ -106,18 +109,21 @@ main {
 }
 
 .task-btn {
-  background: #ff9800;
+  background: linear-gradient(to right, #ff9800, #ffb74d);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 15px;
-  transition: background 0.3s;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .task-btn:hover {
-  background: #e68a00;
+  background: linear-gradient(to right, #ef6c00, #ffa726);
+  transform: scale(1.05);
 }
 
 #tasks {
@@ -200,4 +206,151 @@ main {
 
 .close-btn:hover {
   color: #000;
+}
+/* الأساسيات */
+
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+  width: 250px;
+  background-color: #ffffff5f;
+  color: rgba(255, 255, 255, 0.027);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* محتوى رئيسي */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* زر القائمة في الموبايل */
+.menu-toggle {
+  display: none;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 18px;
+}
+
+/* تنسيق للموبايل */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .main-content {
+    padding-top: 10px;
+  }
+}
+/* overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(50, 46, 46, 0.208); /* شفاف */
+  z-index: 999; /* أقل من الـ sidebar */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+/* تحسين مظهر عناصر القائمة الجانبية */
+.sidebar ul li {
+  padding: 15px 12px;
+  margin-bottom: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #e0f7fa;
+  border-radius: 8px;
+  border: 1px solid #b2ebf2;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar ul li:hover {
+  background-color: #b2ebf2;
+  transform: translateX(-5px);
+}
+
+/* تحسين مظهر زر إضافة سنة دراسية */
+.main-btn {
+  background: linear-gradient(to right, #4caf50, #66bb6a);
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-btn:hover {
+  background: linear-gradient(to right, #43a047, #4caf50);
+  transform: scale(1.03);
+}
+
+/* تحسين مظهر زر المهام */
+.task-btn {
+  background: linear-gradient(to right, #ff9800, #ffc107);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-btn:hover {
+  background: linear-gradient(to right, #f57c00, #ff9800);
+  transform: scale(1.03);
 }
